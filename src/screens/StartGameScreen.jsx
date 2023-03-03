@@ -1,12 +1,27 @@
 import { React, useState } from 'react'
 import { StyleSheet, Text, View, Button, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import { Card, Input } from '../components'
+import { Card, Input, NumberContainer } from '../components'
 import COLORS from '../constants/Colors'
 
-const StartGameScreen = () => {
+const StartGameScreen = ({startGameHandler}) => {
   const [enteredValue, setEnteredValue] = useState('')
+  const [confirmed, setConfirmed] = useState(false)
+  const [selectedNumber, setSelectedNumber] = useState('')
 
   const handlerInputNumber = value => setEnteredValue(value.replace(/[^0-9]/g, ''))
+
+  const handlerReseInput = () => {
+    setEnteredValue('')
+    setConfirmed(false)
+  }
+
+  const handlerConfirmInput = () => {
+    const choseNumber = parseInt(enteredValue)
+    if(isNaN(choseNumber) || choseNumber <= 0 || choseNumber > 99) return
+    setConfirmed(true)
+    setSelectedNumber(choseNumber)
+    setEnteredValue('')
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -25,13 +40,19 @@ const StartGameScreen = () => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button title='Limpiar' color={COLORS.primary}/>
+              <Button title='Limpiar' color={COLORS.primary} onPress={handlerReseInput}/>
             </View>
             <View style={styles.button}>
-              <Button title='Confirmar' color={COLORS.accent}/>
+              <Button title='Confirmar' color={COLORS.accent} onPress={handlerConfirmInput}/>
             </View>
         </View>
       </Card>
+      {confirmed && 
+        <Card style={styles.summaryContainer}>
+          <Text>Tu seleccion</Text>
+          <NumberContainer>{selectedNumber}</NumberContainer>
+          <Button title='empezar juego' onPress={() => startGameHandler(selectedNumber)}/>  
+        </Card>}
     </View>
     </TouchableWithoutFeedback>
   )
@@ -63,5 +84,10 @@ const styles = StyleSheet.create({
     },
     button: {
       width: '47%',
+    },
+    summaryContainer: {
+      alignItems: 'center',
+      marginTop: 20,
+      paddingTop: 10,
     }
 })
