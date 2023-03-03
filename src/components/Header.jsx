@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
         paddingVertical: 30,
     },
     title: {
+        color: '#fff',
         fontSize: 22,
+        fontFamily: 'open-sans',
     }
 })

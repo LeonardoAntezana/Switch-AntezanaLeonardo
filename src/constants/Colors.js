@@ -1,4 +1,6 @@
 export default {
-    primary: '#f7287b',
-    accent: '#c717fc'
+    primary: '#34495E',
+    accent: '#52BE80',
+    delete: '#f7287b',
+    grayLight: '#EAEDED',
 }

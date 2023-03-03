@@ -28,7 +28,7 @@ const StartGameScreen = ({startGameHandler}) => {
       <View style={styles.screen}>
         <Text style={styles.title}>Comenzar Juego</Text>
         <Card style={styles.inputContainer}>
-          <Text>Elija un numero</Text>
+          <Text style={styles.subtitle}>Elija un numero</Text>
           <Input style={styles.input}
           blurOnSbumit 
           autoCapitalize='none'
@@ -51,7 +51,7 @@ const StartGameScreen = ({startGameHandler}) => {
         <Card style={styles.summaryContainer}>
           <Text>Tu seleccion</Text>
           <NumberContainer>{selectedNumber}</NumberContainer>
-          <Button title='empezar juego' onPress={() => startGameHandler(selectedNumber)}/>  
+          <Button title='empezar juego' color={COLORS.accent} onPress={() => startGameHandler(selectedNumber)}/>  
         </Card>}
     </View>
     </TouchableWithoutFeedback>
@@ -63,13 +63,19 @@ export default StartGameScreen
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        paddingVertical: 10,
+        width: '100%',
+        backgroundColor: COLORS.grayLight,
+        paddingVertical: 40,
         alignItems: 'center'
     },
     title: {
         fontSize: 20,
-        marginBottom: 10,
-        fontFamily: 'open-sans-bold'
+        marginBottom: 40,
+        fontFamily: 'open-sans',
+        textTransform: 'uppercase'
+    },
+    subtitle: {
+      fontFamily: 'open-sans-bold',
     },
     inputContainer: {
         width: 300,
